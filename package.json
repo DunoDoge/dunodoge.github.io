@@ -1,6 +1,7 @@
 {
   "name": "duno-blog",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,5 +16,8 @@
   "packageManager": "pnpm@10.32.0",
   "dependencies": {
     "vitepress": "^1.6.4"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2"
   }
 }

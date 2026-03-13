@@ -2,9 +2,10 @@
 layout: home
 
 hero:
-  name: Duno's Blog
-  text: 狗不道（DunoDoge）的文档
+  name: Duno's blog
   tagline: 知之为知之，不知为不知。
+  image:
+    src: /blossom.png
   actions:
     - theme: brand
       text: What's going on?
@@ -14,4 +15,12 @@ hero:
       link: "https://github.com/DunoDoge/dunodoge.github.io"
 ---
 
-# Duno has his own blog NOW!
+ *Duno now has his own blog! --2026.3.10*
+
+## 关于作者
+
+WHU 本科生在读，正在学习计算机相关知识，资历尚浅，还请大佬不吝赐教！
+
+## 关于本站
+
+个人笔记仓库，不定期更新一些学习笔记、CTF题解，以后应该还会考虑写点（各种意义上的）教程？
