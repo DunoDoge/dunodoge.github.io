@@ -1,1 +1,1 @@
-# This is my CS learning records!
+# 有趣的计算机

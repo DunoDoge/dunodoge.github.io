@@ -1,0 +1,11 @@
+.VPHero .VPImage {
+  width: 400px !important;
+  height: auto !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.VPHero .image {
+  align-self: flex-start !important; 
+  margin-top: 150px !important;
+}
