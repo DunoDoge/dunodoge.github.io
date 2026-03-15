@@ -112,6 +112,10 @@ export default defineConfig({
             {
               text: "[Misc]Pokergame",
               link: "/articles/ctf/writeup/bugku-misc-Pokergame"
+            },
+            {
+              text: "[Reverse]2048",
+              link: "/articles/ctf/writeup/bugku-reverse-2048"
             }
           ]
         }

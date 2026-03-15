@@ -15,7 +15,7 @@ kinglet.jpg
 
 同理发现 `kinglet.jpg` 末端隐藏 png 文件，提取得到图片：![](<Pokergame-3.png>)
 
-观察发现两张图片可以拼接成一个（缺角的）二维码，修复二维码，扫描得到信息：key{P0ke_Paper}
+观察发现两张图片可以拼接成一个（缺角的）二维码，修复二维码，扫描得到信息：`key{P0ke_Paper}`
 ![](<Pokergame-4.png>)
 
 测试解压 Poke.zip，得到以下文件![](<Pokergame-5.png>)
@@ -43,7 +43,7 @@ Cound you find him?
 
 根据“Only A is 1”，猜测**将 A 替换为 1**，同时观察发现数字串 2345678910 反复出现，整体替换为 0，得到二进制文本，转换成 ASCII 码：SGFwcHkgdG8gdGVsbCB5b3Uga2V5IGlzIEtleXtPTUdfWW91ZG9pdH0=
 
-识别为 Base64 编码，解码得到信息：Happy to tell you key is Key{OMG_Youdoit}
+识别为 Base64 编码，解码得到信息：`Happy to tell you key is Key{OMG_Youdoit}`
 
 `K.jpg` 实际上是个 zip 文件，改后缀名，利用刚才得到的密码解压，有两个文件 `Ancient spells.txt` 和 `K.jpg`
 
@@ -51,8 +51,6 @@ Cound you find him?
 As long as you help me to fix, I'll give you what you want.
 (It Is Reverse Flag)
 ```
-
-![](<K.jpg>)
 
 查看图片，根据提示和图片内容猜测图片高度被修改过，在 010 Editor 中修改高度得到完整图片；用 StegSolve 打开，多点几次 ">" 观察可得：`flag{Poker_F@ce}`
 
