@@ -116,6 +116,10 @@ export default defineConfig({
             {
               text: "[Reverse]2048",
               link: "/articles/ctf/writeup/bugku-reverse-2048"
+            },
+            {
+              text: "[Reverse]Timer",
+              link: "/articles/ctf/writeup/bugku-reverse-Timer"
             }
           ]
         }
