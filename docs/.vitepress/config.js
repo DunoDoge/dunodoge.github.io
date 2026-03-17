@@ -122,6 +122,17 @@ export default defineConfig({
               link: "/articles/ctf/writeup/bugku-reverse-Timer"
             }
           ]
+        },
+        {
+          text: "WHUCTF WriteUp",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "[Misc]MydataLeaks",
+              link: "/articles/ctf/writeup/whu-misc-MydataLeaks"
+            }
+          ]
         }
       ]
     },
