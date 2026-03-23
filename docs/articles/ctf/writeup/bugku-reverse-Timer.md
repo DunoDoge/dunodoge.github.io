@@ -1,10 +1,15 @@
 # [Reverse]Timer
-### Step.1 反编译 apk 代码
+
+## Step.1 反编译 apk 代码
+
 依旧用 jadx 打开，查看 MainActivity 代码，这里简单梳理一下：
+
 ```java
 public native String stringFromJNI2(int i);
 ```
+
 从 `liblhm.so` 引入的库函数，具体作用在后面说明
+
 ```java
 public static boolean is2(int n) {
     if (n <= 3) {
@@ -21,7 +26,9 @@ public static boolean is2(int n) {
     return true;
 }
 ```
+
 `is2()` 判断一个数是否为质数，详细证明可自行搜索
+
 ```java
 public void run() {
     MainActivity.this.t = System.currentTimeMillis();
@@ -42,6 +49,7 @@ public void run() {
     handler.postDelayed(this, MainActivity.this.t);
 }
 ```
+
 `run()` 在一段倒计时内计算 k，k 最终结果作为 `stringFromJNI2()` 参数用于计算 flag，计算逻辑：
 
 1. 倒计时 = beg - now = 200000s
@@ -50,23 +58,27 @@ public void run() {
 4. 倒计时归零，k 作为传参计算 flag
 
 k 的最终值：
-```
+
+```math
 k = 100*P - 1*(200000 - P) = 101*P - 200000
 ```
+
 其中 P = $\pi$(200000) = 17984，代入得 **k = 1616384**
 
-### Step.2 反编译 liblhm.so 库
+## Step.2 反编译 liblhm.so 库
+
 首先提取出 `liblhm.so` 文件，在 jadx 中导出：
 
-![](<Timer-1.png>)
+![Timer-1](<Timer-1.png>)
 
 或者直接解压 apk，在 /lib 文件夹中找到 liblhm.so 文件
 
 反编译工具用 **IDA** 或 **Ghidra**，这里以 IDA 为例：
 
-![](<Timer-2.png>)
+![Timer-2](<Timer-2.png>)
 
 在 Functions 中找到 `Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2` 函数，按 F5 反编译，注意真正传入的参数为 a3：
+
 ```c
 int __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2(int a1, int a2, int a3)
 {
@@ -118,6 +130,7 @@ int __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJN
   return v4(a1, &v8);
 }
 ```
+
 观察发现函数最后返回一个字符串，起始地址为 `&v8`，且由 v8, n57, n0x6F, v11~v20, _3te7 依次拼接而成，计算逻辑已在代码中给出，代入 `k = 1616384` 就能求解（计算过程略）
 
 最终 flag：

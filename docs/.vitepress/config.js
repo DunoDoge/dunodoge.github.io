@@ -95,6 +95,10 @@ export default defineConfig({
             {
               text: "计算机组成原理",
               link: "/articles/cs/cod/计算机组成原理"
+            },
+            {
+              text: "操作系统原理",
+              link: "/articles/cs/os/操作系统原理"
             }
           ]
         }
@@ -120,6 +124,10 @@ export default defineConfig({
             {
               text: "[Reverse]Timer",
               link: "/articles/ctf/writeup/bugku-reverse-Timer"
+            },
+            {
+              text: "[Reverse]Marco",
+              link: "/articles/ctf/writeup/bugku-reverse-Marco"
             }
           ]
         },

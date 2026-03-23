@@ -2,14 +2,16 @@
 
 用 jadx 打开 `2048.apk`，查看源代码
 
-![](<2048-1.png>)
+![2048-1](<2048-1.png>)
 
 在 MainGame 类中找到 flag 解密逻辑：
+
 ```java
 public String getFlag() {
     return this.flag;
 }
 ```
+
 ```java
 public boolean isCTFWin() {
     if (this.ctfwin != 666) {
@@ -20,6 +22,7 @@ public boolean isCTFWin() {
     return true;
 }
 ```
+
 ```java
 public String decryptFlag(int i) {
     StringBuffer stringBuffer = new StringBuffer();
@@ -55,15 +58,19 @@ public String decryptFlag(int i) {
     return stringBuffer.toString();
 }
 ```
+
 其中 `strReplaceAll` 就是加密后的 flag，问题转化为破解 `checkSum`，注意到
+
 ```java
 public int checkSum = 0;
 ```
+
 继续查找用例：
 
-![](<2048-2.png>)
+![2048-2](<2048-2.png>)
 
 转到 move 代码片段，发现 checkSum 由一组值多次累加得到：
+
 ```java
 // move()
 int iBinarySearch = Arrays.binarySearch(this.checkPoints, tile.getValue());
@@ -77,15 +84,20 @@ if (iBinarySearch >= 0 && this.ctfwin != 666) {
     }
 }
 ```
+
 其中 `checkPoints` 和 `checkPointsCalcCount` 已经在代码中给出：
+
 ```java
 public int[] checkPoints = {16, 32, 64, 128, 256, 512, 1024, 2048}; // 合成数字
 public int[] checkPointsCalcCount = {100, 60, 30, 10, 8, 4, 2, 1}; // 计入次数
 ```
+
 因此 checkSum 最大可能取值等于
+
 ```python
 sum([checkPoints[i] * checkPointsCalcCount[i] for i in range(len(checkpoints))]) # 14912
 ```
+
 实际上 checkSum = 14912，这是因为要想赢得游戏，需要合成数字的次数 ≥ checkPointsCalcCount 给出的值，因此取最大值
 
 将 checkSum = 14912 代入 `decryptFlag()` 运行解得 flag
