@@ -5,7 +5,8 @@ hero:
   name: Duno's blog
   tagline: 知之为知之，不知为不知。
   image:
-    src: /blossom.png
+    light: /blossom.png
+    dark: /blossom-dark.png
   actions:
     - theme: brand
       text: What's going on?
