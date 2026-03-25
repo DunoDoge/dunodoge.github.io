@@ -128,6 +128,14 @@ export default defineConfig({
             {
               text: "[Reverse]Marco",
               link: "/articles/ctf/writeup/bugku-reverse-Marco"
+            },
+            {
+              text: "[Reverse]SafeBox",
+              link: "/articles/ctf/writeup/bugku-reverse-SafeBox"
+            },
+            {
+              text: "[Reverse]patch_call",
+              link: "/articles/ctf/writeup/bugku-reverse-patch_call"
             }
           ]
         },
