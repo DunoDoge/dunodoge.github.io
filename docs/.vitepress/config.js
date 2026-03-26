@@ -136,6 +136,10 @@ export default defineConfig({
             {
               text: "[Reverse]patch_call",
               link: "/articles/ctf/writeup/bugku-reverse-patch_call"
+            },
+            {
+              text: "[Reverse]Luck",
+              link: "/articles/ctf/writeup/bugku-reverse-Luck"
             }
           ]
         },
