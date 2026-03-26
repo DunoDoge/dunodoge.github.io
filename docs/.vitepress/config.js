@@ -140,6 +140,10 @@ export default defineConfig({
             {
               text: "[Reverse]Luck",
               link: "/articles/ctf/writeup/bugku-reverse-Luck"
+            },
+            {
+              text: "[Reverse]easy-100",
+              link: "/articles/ctf/writeup/bugku-reverse-easy-100"
             }
           ]
         },
