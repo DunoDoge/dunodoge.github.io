@@ -48,6 +48,7 @@ const customElements = [
 
 export default defineConfig({
   title: "Duno's blog",
+  lastUpdated: true,
   description: "Duno's CS and SCSE learning records",
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -80,7 +81,8 @@ export default defineConfig({
     nav: [
       { text: "Guide", link: "/guide/" },
       { text: "CS", link: "/articles/cs/"},
-      { text: "CTF", link: "/articles/ctf/" }
+      { text: "CTF", link: "/articles/ctf/" },
+      { text: "others", link: "/articles/others/"}
     ],
     socialLinks: [
       { icon: "github", link: "https://github.com/DunoDoge" },
@@ -155,6 +157,20 @@ export default defineConfig({
             {
               text: "[Misc]MydataLeaks",
               link: "/articles/ctf/writeup/whu-misc-MydataLeaks"
+            }
+          ]
+        }
+      ],
+      "/articles/others": [
+        {
+          items: [
+            {
+              text: "Powershell，你的上一条指令呢？",
+              link: "/articles/others/pwsh-last_cmd_bug"
+            },
+            {
+              text: "我的第一个 Vibe Coding 项目",
+              link: "/articles/others/vibe-first_project"
             }
           ]
         }

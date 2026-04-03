@@ -15,8 +15,6 @@ hero:
       link: "https://github.com/DunoDoge/dunodoge.github.io"
 ---
 
-# Duno now has his own blog! --2026.3.10
-
 ## 关于作者
 
 WHU 本科生在读，正在学习计算机相关知识，资历尚浅，还请大佬不吝赐教！
