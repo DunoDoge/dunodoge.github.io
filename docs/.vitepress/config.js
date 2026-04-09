@@ -146,6 +146,10 @@ export default defineConfig({
             {
               text: "[Reverse]easy-100",
               link: "/articles/ctf/writeup/bugku-reverse-easy-100"
+            },
+            {
+              text: "[Reverse]Mountain climbing",
+              link: "/articles/ctf/writeup/bugku-reverse-Mountain climbing"
             }
           ]
         },
@@ -171,6 +175,10 @@ export default defineConfig({
             {
               text: "我的第一个 Vibe Coding 项目",
               link: "/articles/others/vibe-first_project"
+            },
+            {
+              text: "Vibe Coding for HarmonyOS",
+              link: "/articles/others/vibe-hmos_dev"
             }
           ]
         }
