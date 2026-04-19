@@ -161,6 +161,18 @@ export default defineConfig({
             {
               text: "[Misc]MydataLeaks",
               link: "/articles/ctf/writeup/whu-misc-MydataLeaks"
+            },
+            {
+              text: "[Crypto]来签个到吧",
+              link: "/articles/ctf/writeup/whu-crypto-来签个到吧"
+            },
+            {
+              text: "[Crypto]maybe_Wiener",
+              link: "/articles/ctf/writeup/whu-crypto-maybe_Wiener"
+            },
+            {
+              text: "[Crypto]myHash",
+              link: "/articles/ctf/writeup/whu-crypto-myHash"
             }
           ]
         }
