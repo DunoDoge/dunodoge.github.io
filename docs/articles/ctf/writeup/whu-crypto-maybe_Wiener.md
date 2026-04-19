@@ -1,4 +1,4 @@
-# maybe_Wiener WriteUp
+# [Crypto]maybe_Wiener
 
 ## 题目分析
 
@@ -75,14 +75,14 @@ k/d ≈ e/φ(n)
 令：
 
 ```math
-φ_{{approx}} = n - 2·⌊\sqrt{n}⌋ + 1
+φ_{approx} = n - 2·⌊\sqrt{n}⌋ + 1
 ```
 
 ### 3. 误差分析
 
 ```math
 
-|φ(n) - φ_{{approx}}| = |(p+q) - 2\sqrt{n}|
+|φ(n) - φ_{approx}| = |(p+q) - 2\sqrt{n}|
                   = |(p+q)² - 4n| / (p+q+2\sqrt{n})
                   = (p-q)² / (p+q+2\sqrt{n})
                   < (p-q)² / (4\sqrt{n})
@@ -100,7 +100,7 @@ k/d ≈ e/φ(n)
 Wiener 攻击条件：
 
 ```math
-|φ - φ_{{approx}}| < φ(n) / (2·d²)
+|φ - φ_{approx}| < φ(n) / (2·d²)
 φ(n) / (2·d²) ≈ 2^{2048} / 2^{1281} = 2^{767}
 ```
 
@@ -115,7 +115,7 @@ Wiener 攻击条件：
 
 ## 解题步骤
 
-### 第一步：构造 $φ_{{approx}}$
+### 第一步：构造 $φ_{approx}$
 
 ```python
 sqrt_n = gmpy2.isqrt(n)

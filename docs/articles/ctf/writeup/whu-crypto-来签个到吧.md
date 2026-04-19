@@ -1,4 +1,4 @@
-# 来签个到吧 WriteUp
+# [Crypto]来签个到吧
 
 分析下 `chall.py` 中的加密流程：
 

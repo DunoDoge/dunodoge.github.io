@@ -1,4 +1,4 @@
-# myHash WriteUp
+# [Crypto]myHash
 
 ## 题目分析
 
