@@ -4,22 +4,23 @@ layout: home
 
 hero:
   name: "Duno's Blog"
-  text: "Personal Learning Records and Sharing"
-  tagline: My great project tagline
+  text: ""
+  tagline: 知之为知之，不知为不知。
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: What's New
+      link: /latest
     - theme: alt
-      text: API Examples
-      link: /api-examples
-
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      text: View on GitHub
+      link: https://github.com/DunoDoge/dunodoge.github.io
 ---
 
+## 关于作者
+
+WHU 本科生在读，正在学习计算机相关知识，资历尚浅，还请大佬不吝赐教！
+
+## 关于本站
+
+个人笔记仓库，不定期更新一些学习笔记、CTF题解，以后应该还会考虑写点（各种意义上的）教程？
+
+![Duno's Github chart](https://ghchart.rshah.org/DunoDoge)
