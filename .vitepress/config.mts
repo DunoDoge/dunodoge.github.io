@@ -119,7 +119,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Git 中的“浅克隆”', link: '/docs/Other/git-shallow-clone' },
-            { text: 'Powershell，你的上一条指令呢？', link: '/docs/Other/pwsh-last-cmd-bug' }
+            { text: 'Powershell，你的上一条指令呢？', link: '/docs/Other/pwsh-last-cmd-bug' },
+            { text: 'Windows 管理 python 版本的正确姿势', link: '/docs/Other/py-multi-version' }
           ]
         }
       ]
