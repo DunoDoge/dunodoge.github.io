@@ -138,7 +138,7 @@ SELECT * FROM <表名>;
 - 查询经过计算的值（算数表达式、字符串常量、函数等）
 - 查询满足条件的**元组**
 
-![数据库系统-表3.5.png](img/database-graph-3-5.png)
+![数据库系统-表3.5.png](img/database-table-3-5.png)
 
 #### 连接查询
 

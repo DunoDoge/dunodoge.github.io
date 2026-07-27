@@ -54,9 +54,6 @@ title: 正在跳转
 ---
 
 <meta http-equiv="refresh" content="0; url=${target}" />
-<script>
-  window.location.replace('${target}')
-</script>
 
 正在跳转到最新文章...
 
