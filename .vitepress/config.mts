@@ -28,6 +28,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'Coding', link: '/docs/Coding/' },
       {
         text: '计算机科学',
         items: [
@@ -44,9 +45,21 @@ export default defineConfig({
         ]
       },
       { text: '杂论', link: '/docs/Other/' },
+      { text: '流课表', link: '/flowcourse/', target: '_blank' },
     ],
 
     sidebar: {
+      '/docs/Coding/': [
+        {
+          text: 'C++',
+          collapsed: false,
+          items: [
+            { text: 'C++ Primer Plus 阅读拾遗', link: '/docs/Coding/C++/cpp-reading-notes' },
+            { text: 'C/C++ 空行使用规范', link: '/docs/Coding/C++/cpp-empty-line-usage' },
+            { text: 'C++ 名称空间', link: '/docs/Coding/C++/cpp-namespace' }
+          ]
+        }
+      ],
       '/docs/CS/': [
         {
           text: '计算机组成与设计',

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>流课表 - 简洁高效的高校课程表管理</title>
+  <meta name="description" content="流课表是一款面向高校学生的 HarmonyOS 课程表管理应用，支持教务系统一键导入、课程提醒、日历导出等功能。" />
+  <link rel="icon" href="flowcourse_favicon.png" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0A59F7;
+      --primary-light: #3B82F6;
+      --primary-dark: #0041C2;
+      --primary-bg: rgba(10, 89, 247, 0.06);
+      --primary-bg-hover: rgba(10, 89, 247, 0.10);
+      --text-primary: rgba(0, 0, 0, 0.9);
+      --text-secondary: rgba(0, 0, 0, 0.6);
+      --text-hint: rgba(0, 0, 0, 0.38);
+      --bg-body: #F5F5F5;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #FAFAFA;
+      --border-color: rgba(0, 0, 0, 0.06);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --max-width: 960px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #5291FF;
+        --primary-light: #6BA3FF;
+        --primary-dark: #3B7BEB;
+        --primary-bg: rgba(82, 145, 255, 0.08);
+        --primary-bg-hover: rgba(82, 145, 255, 0.14);
+        --text-primary: rgba(255, 255, 255, 0.9);
+        --text-secondary: rgba(255, 255, 255, 0.6);
+        --text-hint: rgba(255, 255, 255, 0.35);
+        --bg-body: #121212;
+        --bg-card: #1E1E1E;
+        --bg-card-hover: #252525;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "HarmonyOS Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      padding: 80px 0 64px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(10, 89, 247, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .hero::before {
+        background: radial-gradient(circle, rgba(82, 145, 255, 0.08) 0%, transparent 70%);
+      }
+    }
+
+    .hero-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      margin: 0 auto 28px;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-icon svg {
+      width: 52px;
+      height: 52px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .slogan {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .hero .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--primary-bg);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .badge:hover {
+      background: var(--primary-bg-hover);
+    }
+
+    .badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ===== Section ===== */
+    .section {
+      padding: 56px 0;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    /* ===== Features ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: var(--bg-card-hover);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      transition: background 0.2s;
+    }
+
+    .feature-card:hover .feature-icon {
+      background: var(--primary-bg-hover);
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--primary);
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== Permissions ===== */
+    .permissions-list {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .permission-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+      align-items: flex-start;
+    }
+
+    .permission-item:last-child {
+      border-bottom: none;
+    }
+
+    .permission-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .permission-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--primary);
+    }
+
+    .permission-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .permission-info p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .permission-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+
+    .tag-user {
+      background: rgba(255, 152, 0, 0.1);
+      color: #F57C00;
+    }
+
+    .tag-system {
+      background: rgba(76, 175, 80, 0.1);
+      color: #388E3C;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .tag-user {
+        background: rgba(255, 183, 77, 0.12);
+        color: #FFB74D;
+      }
+      .tag-system {
+        background: rgba(129, 199, 132, 0.12);
+        color: #81C784;
+      }
+    }
+
+    /* ===== Agreement ===== */
+    .agreement-section {
+      text-align: center;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .agreement-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: var(--radius-xl);
+      background: var(--primary-bg);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .agreement-link:hover {
+      background: var(--primary-bg-hover);
+      transform: translateY(-1px);
+    }
+
+    .agreement-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-hint);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    /* ===== Animations ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero-icon {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-icon">
+        <img src="flowcourse_favicon.png" alt="流课表" width="52" height="52" />
+      </div>
+      <h1>流课表</h1>
+      <p class="slogan">简洁高效的高校课程表管理</p>
+      <div class="badges">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          HarmonyOS 原生
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          教务系统一键导入
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          课程提醒
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">核心功能</h2>
+      <p class="section-desc fade-in">为高校学生量身打造的课表管理体验</p>
+      <div class="features-grid">
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>课程管理</h3>
+          <p>添加、编辑、删除课程信息，包括名称、地点、时间、周次等</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>课表展示</h3>
+          <p>周视图、日视图多维度查看课程安排，一目了然</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>教务系统导入</h3>
+          <p>登录学校教务系统，一键获取并导入课表数据</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          </div>
+          <h3>日历导出</h3>
+          <p>将课程信息导出到系统日历，随时随地查看日程</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>课程提醒</h3>
+          <p>自定义提前提醒时间，每门课程可单独设置提醒开关</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <h3>数据备份与恢复</h3>
+          <p>导出课表为备份文件，随时恢复或迁移数据</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3>多课表管理</h3>
+          <p>创建多个课表，轻松切换不同学期的课程安排</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>上课时间配置</h3>
+          <p>自定义各节次上课时间，支持多套时间配置模板</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5a2.5 2.5 0 1 0 0-5"/><circle cx="8.5" cy="8.5" r="2.5"/><circle cx="13.5" cy="14.5" r="2.5"/><path d="M6 18.5a2.5 2.5 0 1 0 5 0"/></svg>
+          </div>
+          <h3>主题个性化</h3>
+          <p>多种主题色可选，支持深色模式，打造专属风格</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Agreement -->
+  <section class="agreement-section">
+    <a href="https://agreement-drcn.hispace.dbankcloud.cn/index.html?lang=zh&agreementId=1961583689049595072" class="agreement-link fade-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      隐私政策
+    </a>
+    <a href="user-agreement.html" class="agreement-link fade-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      用户服务协议
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 流课表 &middot; 面向高校学生的课程表管理应用</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.fade-in');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
