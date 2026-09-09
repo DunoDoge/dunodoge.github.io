@@ -46,6 +46,10 @@ export default defineConfig({
       },
       { text: '杂论', link: '/docs/Other/' },
       { text: '流课表', link: '/flowcourse/', target: '_blank' },
+      {
+        text: 'NextDOS',
+        items: [{ text: '用户服务协议', link: '/nextdos/user-agreement.html', target: '_blank' }]
+      },
     ],
 
     sidebar: {
