@@ -28,7 +28,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Coding', link: '/docs/Coding/' },
+      { text: '学码懂码', link: '/docs/Coding/' },
       {
         text: '计算机科学',
         items: [
@@ -44,8 +44,13 @@ export default defineConfig({
           { text: 'CTF 指北', link: '/docs/CTF/Guide/guide-overview' },
         ]
       },
+      { text: '鸿蒙开发',
+        items: [
+          { text: '流课表', link: '/flowcourse/index.html', target: '_blank' },
+          { text: 'NextDOS', link: '/nextdos/index.html', target: '_blank' },
+        ]
+      },
       { text: '杂论', link: '/docs/Other/' },
-      { text: '流课表', link: '/flowcourse/', target: '_blank' },
     ],
 
     sidebar: {
@@ -54,7 +59,7 @@ export default defineConfig({
           text: 'C++',
           collapsed: false,
           items: [
-            { text: 'C++ Primer Plus 阅读拾遗', link: '/docs/Coding/C++/cpp-reading-notes' },
+            { text: 'C++ Primer Plus 阅读记录', link: '/docs/Coding/C++/cpp-reading-notes' },
             { text: 'C/C++ 空行使用规范', link: '/docs/Coding/C++/cpp-empty-line-usage' },
             { text: 'C++ 名称空间', link: '/docs/Coding/C++/cpp-namespace' }
           ]
