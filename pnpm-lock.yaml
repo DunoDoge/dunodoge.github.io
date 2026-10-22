@@ -307,6 +307,7 @@ packages:
     engines: {node: ^22.20 || ^24.12 || >=25}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/wasm-node@4.64.8':
     resolution: {integrity: sha512-NRWUfew4xrhwdAmiL/lMujhaREndAJRS33APIntHB9CXIicu5APtScRBYfhYTfZDFPtcz0UEZ3oUsHFCyUNHSw==}

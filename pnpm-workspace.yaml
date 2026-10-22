@@ -1,0 +1,8 @@
+nodeLinker: hoisted
+
+overrides:
+  esbuild: 0.25.12
+  rollup: npm:@rollup/wasm-node@4.64.8
+
+allowBuilds:
+  esbuild: true
