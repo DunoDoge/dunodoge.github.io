@@ -35,6 +35,7 @@ export default defineConfig({
           { text: '计算机组成与设计', link: '/docs/CS/COD/cod-overview' },
           { text: '数据库系统原理', link: '/docs/CS/Database/database-overview' },
           { text: '汇编语言与接口设计', link: '/docs/CS/Assembly/assembly-overview' }
+          { text: '计算机网络', link: '/docs/CS/Net/net-overview'}
         ]
       },
       {
@@ -70,14 +71,14 @@ export default defineConfig({
           text: '计算机组成与设计',
           collapsed: false,
           items: [
-            { text: '计组复习笔记', link: '/docs/CS/COD/cod-review-notes' }
+            { text: '复习笔记-计算机组成原理', link: '/docs/CS/COD/cod-review-notes' }
           ]
         },
         {
           text: '数据库系统原理',
           collapsed: false,
           items: [
-            { text: '数据库复习笔记', link: '/docs/CS/Database/database-review-notes' },
+            { text: '复习笔记-数据库系统', link: '/docs/CS/Database/database-review-notes' },
             { text: '并发控制中的封锁协议', link: '/docs/CS/Database/database-lock-protocal' },
             { text: 'PL/SQL 中的游标是什么？', link: '/docs/CS/Database/database-sql-cursor' }
           ]
@@ -86,7 +87,14 @@ export default defineConfig({
           text: '汇编语言与接口设计',
           collapsed: false,
           items: [
-            { text: '接口复习笔记', link: '/docs/CS/Assembly/io-review-notes' }
+            { text: '复习笔记-微机接口设计', link: '/docs/CS/Assembly/io-review-notes' }
+          ]
+        },
+        {
+          text: '计算机网络',
+          collapsed: false,
+          items: [
+            { text: '复习日记-计算机网络', link: '/docs/CS/Net/net-review-diary'}
           ]
         }
       ],
